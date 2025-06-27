@@ -430,7 +430,7 @@ docker buildx build --platform linux/amd64,linux/arm64
 ### Purpose of HEALTHCHECK?
 - Monitors health.
 ```dockerfile
-HEALTHCHECK CMD curl -f http://localhost/
+HEALTHCHECK --interval=30s --timeout=3s --retries=3 CMD curl -f http://localhost/ || exit 1
 ```
 
 ### Rollback Swarm service?
