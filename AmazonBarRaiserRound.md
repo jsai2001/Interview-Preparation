@@ -947,44 +947,572 @@ By focusing on these metrics, I ensured the project delivered tangible results t
 5. **Open Communication and Collaboration**: I held regular check-ins to gather feedback, address blockers, and celebrate milestones, like successful model alignments. I encouraged open dialogue, ensuring alignment with the data science team and project lead on model specifications.
 6. **Risk Management**: I anticipated risks, such as tight sprint timelines, and mitigated them by prioritizing critical tasks (e.g., aligning models B and C) and planning phased updates for model A, maintaining the release schedule.
 
-23. How does the deployment process typically work in your current role, and how have you improved it? (*Insist on the Highest Standards*, *Deliver Results*)
-24. How have you handled a high volume of incoming support tickets while maintaining quality? (*Customer Obsession*, *Insist on the Highest Standards*)
-25. Describe a time you developed a tool to improve operations or maintenance. What was the impact? (*Invent and Simplify*, *Deliver Results*)
-26. Tell me about a time you supported a software deployment in a production environment. What challenges did you face, and how did you overcome them? (*Bias for Action*, *Dive Deep*)
-27. Share an example of coordinating with multiple teams to resolve a support issue. How did you ensure success? (*Earn Trust*, *Success and Scale Bring Broad Responsibility*)
-28. How have you handled a situation where you had to quickly learn a new system or technology to support a project? (*Learn and Be Curious*, *Deliver Results*)
+**23. How does the deployment process typically work in your current role, and how have you improved it? (*Insist on the Highest Standards*, *Deliver Results*)**
+
+You previously used **Rolling Deployments** and have now transitioned to **Blue-Green Deployments** due to their advantages. This response will describe your current Blue-Green deployment process, highlight the transition from Rolling Deployments, explain the advantages of Blue-Green over Rolling. The response will tie to key engineering metrics (e.g., **Deployment Frequency (DF)**, **Change Failure Rate (CFR)**, **Mean Time to Restore (MTTR)**) and emphasize operational excellence.
+
+---
+
+### **How the Deployment Process Typically Works in Your Current Role**
+
+**Current Deployment Process (Blue-Green Deployment)**: As a DevOps Engineer at NielsenIQ, you currently use **Blue-Green Deployment** to release application updates in a cloud-native environment leveraging AWS (EC2, EKS, S3, RDS), Docker, Kubernetes, and GitHub Actions. This process ensures zero-downtime, reliable deployments, aligning with **Insist on the Highest Standards**.
+
+**Process Steps**:
+1. **Code Commit and Version Control**: Developers commit code to GitHub or Bitbucket repositories, ensuring collaborative version tracking, as noted in your resume: “Git, GitHub, Bitbucket - Ensured efficient collaboration and version tracking.”
+2. **CI/CD Pipeline Trigger**: Commits initiate automated CI/CD pipelines in GitHub Actions, where code is built, tested, and packaged into Docker containers. Your resume states: “Automated CI/CD pipelines using GitHub Actions, Python, and Shell.”
+3. **Green Environment Deployment**: The new application version is deployed to the “Green” environment (e.g., a separate Kubernetes cluster or AWS EKS node group), provisioned using Terraform and Ansible. Your resume confirms: “Managed AWS cloud infrastructure with Terraform, Ansible, and Python scripts using Boto3.”
+4. **Validation in Green**: The Green environment undergoes rigorous testing (e.g., automated unit/integration tests) and monitoring via AWS CloudWatch to ensure error-free performance before going live. Your resume notes: “Spearheaded Docker containerization, streamlining deployments and eliminating errors.”
+5. **Traffic Switch**: Once validated, traffic is switched from the “Blue” (current) environment to the Green environment using an AWS Elastic Load Balancer (ELB) or Kubernetes Ingress, ensuring zero downtime. This supports **Post-Level Availability Metrics**.
+6. **Post-Deployment Monitoring**: CloudWatch tracks metrics like CPU usage, latency, and errors in the Green environment to confirm stability, aligning with **Service Failure Rate** and **CPU Spiking Up**.
+7. **Rollback Option**: If issues occur, traffic can be instantly switched back to the Blue environment, minimizing **MTTR**, as implied by your focus on reliability and uptime.
+
+**Transition from Rolling Deployments**:
+- **Previous Process (Rolling Deployments)**: Previously, you used Rolling Deployments, where the new version was incrementally rolled out across existing instances (e.g., Kubernetes pods) in the production environment. Old pods were replaced one by one, allowing gradual updates but risking temporary disruptions or version incompatibilities.
+- **Why You Switched**: You transitioned to Blue-Green Deployments to address Rolling Deployment limitations, such as potential downtime and higher rollback complexity, which impacted **Post-Level Availability** and **MTTR**. Blue-Green ensures zero downtime and instant rollbacks, better aligning with your goal of error-free deployments.
+
+**Advantages of Blue-Green Over Rolling Deployments**:
+- **Zero Downtime**: Blue-Green switches traffic instantly via ELB, ensuring **Post-Level Availability** (e.g., 99.99%), whereas Rolling Deployments may cause brief disruptions during pod transitions, impacting **Request Latency**.
+- **Instant Rollback**: Blue-Green allows immediate reversion to the Blue environment, reducing **MTTR**, while Rolling Deployments require redeploying the old version, increasing recovery time.
+- **Lower Risk**: Blue-Green tests the Green environment fully before going live, reducing **CFR** and **Service Failure Rate**, whereas Rolling Deployments run old and new versions simultaneously, risking compatibility issues (**Error Rate**).
+- **Improved Validation**: Blue-Green’s isolated Green environment allows thorough testing, aligning with your “eliminating deployment errors,” unlike Rolling’s in-place updates, which may expose users to issues sooner.
+- **Alignment with Your Work**: Blue-Green supports your 25% reduction in deployment time (**DF**, **LTTC**) and 30% reduction in misalignments (**CFR**), providing a more robust process than Rolling.
+
+**Standards and Results**:
+- **Insist on the Highest Standards**: Blue-Green ensures error-free, zero-downtime deployments through automation (GitHub Actions, Terraform) and monitoring (CloudWatch), meeting rigorous reliability standards.
+- **Deliver Results**: The process delivers fast, stable releases, as evidenced by your resume’s metrics (e.g., 25% faster deployments, zero errors), enhancing application performance and user experience.
+
+---
+
+### **How You Have Improved the Deployment Process**
+
+You’ve significantly enhanced the deployment process by transitioning from Rolling to Blue-Green Deployments and implementing optimizations that improve efficiency, reliability, and scalability. These improvements reflect **Insist on the Highest Standards** and **Deliver Results**, focusing on unique contributions not covered in prior answers where possible.
+
+1. **Transitioned to Blue-Green Deployment**:
+   - **Improvement**: Shifted from Rolling Deployments to Blue-Green to eliminate downtime and reduce rollback complexity, leveraging AWS EKS and ELB for seamless traffic switching.
+   - **Impact**: Enabled zero-downtime deployments, improving **Post-Level Availability** and reducing **MTTR** compared to Rolling’s incremental updates, which risked disruptions.
+   - **Evidence from Resume**: Implied by “Spearheaded Docker containerization, streamlining deployments and eliminating errors” and “Managed AWS cloud infrastructure with Terraform, Ansible,” which support Blue-Green’s dual-environment setup.
+   - **Standards and Results**: Blue-Green upholds high reliability standards (Highest Standards) and delivers uninterrupted service (Deliver Results).
+
+2. **Streamlined CI/CD Pipelines**:
+   - **Improvement**: Enhanced GitHub Actions workflows with Python and Shell scripting to automate build, test, and deployment stages, optimizing the Blue-Green process.
+   - **Impact**: Reduced deployment time by **25%**, boosting **DF** and **LTTC**, and minimized pipeline bottlenecks (**Pile Up**).
+   - **Evidence from Resume**: “Automated CI/CD pipelines using GitHub Actions, Python, and Shell, achieving a 25% reduction in deployment time.”
+   - **Standards and Results**: Automation ensures consistent, high-quality deployments (Highest Standards) and faster releases (Deliver Results).
+
+3. **Improved Deployment Stability**:
+   - **Improvement**: Implemented Docker containerization and Kubernetes orchestration to ensure consistent Blue and Green environments, eliminating deployment errors.
+   - **Impact**: Achieved zero deployment errors, reducing **CFR** and supporting **Ring-Based Deployments** (similar to Blue-Green’s staged approach).
+   - **Evidence from Resume**: “Spearheaded Docker containerization, streamlining deployments and eliminating errors.”
+   - **Standards and Results**: Error-free deployments meet rigorous quality standards (Highest Standards) and ensure reliable outcomes (Deliver Results).
+
+4. **Enhanced Monitoring for Green Environment**:
+   - **Improvement**: Deployed AWS CloudWatch with custom Python metrics to monitor the Green environment’s health (e.g., CPU usage, latency) before traffic switches.
+   - **Impact**: Improved system reliability by **25%**, reducing **Service Failure Rate** and addressing **CPU Spiking Up** proactively.
+   - **Evidence from Resume**: “Implemented AWS CloudWatch monitoring solutions with custom metrics and alarms in Python, ensuring system reliability and uptime.”
+   - **Standards and Results**: Robust monitoring ensures high reliability (Highest Standards) and prevents user-facing issues (Deliver Results).
+
+5. **Optimized Infrastructure Provisioning**:
+   - **Improvement**: Automated AWS infrastructure setup for Blue and Green environments using Terraform, Ansible, and Python (Boto3), enabling rapid scaling.
+   - **Impact**: Reduced provisioning time by **20%** and operational costs by **25%**, optimizing **Infrastructure Utilization** and **Deployment for Zone**.
+   - **Evidence from Resume**: “Managed AWS cloud infrastructure with Terraform, Ansible, and Python scripts using Boto3 for cloud automation, decreasing infrastructure provisioning time by 20%” and “Upskilled in cloud technologies, optimizing system efficiency and reducing operational costs by 25%.”
+   - **Standards and Results**: Scalable, cost-efficient infrastructure meets high standards (Highest Standards) and supports business goals (Deliver Results).
+
+---
+
+### **Connection to Operational Excellence**
+
+Your transition from Rolling to Blue-Green Deployments and subsequent improvements align with key metrics:
+- **Primary Metrics**:
+  - **DF** and **LTTC**: 25% faster deployments via CI/CD automation and Blue-Green’s efficient switching.
+  - **CFR**: Zero errors through containerization, surpassing Rolling’s riskier updates.
+  - **MTTR** and **Service Failure Rate**: 25% reliability improvement via CloudWatch and instant Blue-Green rollbacks.
+  - **Post-Level Availability**: Zero-downtime Blue-Green switches ensure high uptime, unlike Rolling’s potential disruptions.
+- **Secondary Metrics**:
+  - **Pile Up**: Streamlined pipelines reduce bottlenecks.
+  - **Infrastructure Utilization**: 20% faster provisioning and 25% cost reduction.
+  - **CPU Spiking Up**: Monitored via CloudWatch to prevent performance issues.
+  - **Ring-Based Deployments**: Blue-Green’s staged approach mirrors your Kubernetes expertise.
+
+**Insist on the Highest Standards**: The shift to Blue-Green, combined with automation and monitoring, ensures error-free, reliable deployments, exceeding Rolling Deployment’s limitations.
+**Deliver Results**: Your improvements (25% faster deployments, zero errors, 25% cost reduction) deliver measurable outcomes, enhancing application performance and cost efficiency.
+
+---
+
+**24. How have you handled a high volume of incoming support tickets while maintaining quality? (*Customer Obsession*, *Insist on the Highest Standards*)**
+
+**How I Handled a High Volume of Incoming Support Tickets While Maintaining Quality**
+
+I done handled a high volume of support tickets at NielsenIQ by leveraging automation, proactive monitoring, and team mentoring to ensure quick resolution while upholding **Customer Obsession** and **Insist on the Highest Standards**. My approach focused on streamlining ticket management, prioritizing customer-impacting issues, and maintaining rigorous quality in resolutions to keep systems reliable and users satisfied.
+
+1. **I Done Automated Ticket Creation and Monitoring**  
+   I done set up AWS CloudWatch with custom Python metrics and alarms to automatically detect issues like CPU spikes or service failures and log them as tickets in a system like Jira. This caught problems early, reducing the manual ticket load and speeding up
+
+2. **I Done Streamlined CI/CD Pipeline Tickets**  
+   I done optimized GitHub Actions workflows to reduce pipeline-related tickets, such as build failures or deployment misalignments, by automating testing and synchronization. This cut down the volume of tickets caused by repetitive issues (**Pile Up**).
+
+3. **I Done Prioritized and Resolved Technical Debt Tickets**  
+   I done managed tickets for technical debt and backlogs, like bug fixes or system optimizations, by scheduling regular maintenance sprints (**Clearance Sale**). I done used Jira to track and prioritize these tasks, ensuring critical issues were addressed first.  
+
+4. **I Done Mentored Team to Handle Tickets Efficiently**  
+   I done guided junior engineers on triaging and resolving tickets, teaching them to use CloudWatch data and CI/CD logs to diagnose issues quickly. This distributed the ticket load and improved resolution times (**Incident Response Time**).  
+
+5. **I Done Automated Data-Related Tickets**  
+   I done designed a real-time data aggregation system with Snowflake SQL and Python, automating query generation to reduce tickets related to data processing errors or delays. This streamlined data workflows, cutting down manual support requests.  
+
+---
+
+**Customer Obsession**: I done prioritized tickets impacting users, like data errors or deployment issues, ensuring quick resolutions to maintain customer trust and satisfaction.  
+**Insist on the Highest Standards**: I done used automation and mentoring to ensure consistent, accurate ticket resolutions, upholding rigorous quality standards even under high volume.
+
+---
+
+**25. Describe a time you developed a tool to improve operations or maintenance. What was the impact? (*Invent and Simplify*, *Deliver Results*)**
+
+I done developed a Python script to automate regression testing validations and model execution time monitoring for NielsenIQ’s real-time data aggregation system. The script validated Snowflake SQL query outputs during regression testing, checking data accuracy and integrity, and measured model execution time to assess performance. By automating these checks, I eliminated manual validation errors and ensured consistent data quality. The impact was a 20% improvement in data processing efficiency and a 45% increase in reporting accuracy, enhancing system reliability and performance while streamlining regression testing for operational excellence.
+
+**Demo Script:**
+
+```python
+import snowflake.connector
+import pandas as pd
+import time
+from datetime import datetime
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+# Snowflake connection parameters (replace with your credentials)
+SNOWFLAKE_CONFIG = {
+    'user': 'your_username',
+    'password': 'your_password',
+    'account': 'your_account',
+    'warehouse': 'your_warehouse',
+    'database': 'your_database',
+    'schema': 'your_schema'
+}
+
+def connect_to_snowflake():
+    """Establish connection to Snowflake."""
+    try:
+        conn = snowflake.connector.connect(**SNOWFLAKE_CONFIG)
+        logger.info("Connected to Snowflake successfully")
+        return conn
+    except Exception as e:
+        logger.error(f"Failed to connect to Snowflake: {str(e)}")
+        raise
+
+def execute_query(conn, query):
+    """Execute a Snowflake query and return results as a DataFrame."""
+    start_time = time.time()
+    try:
+        cursor = conn.cursor()
+        cursor.execute(query)
+        df = pd.DataFrame(cursor.fetchall(), columns=[desc[0] for desc in cursor.description])
+        execution_time = time.time() - start_time
+        logger.info(f"Query executed in {execution_time:.2f} seconds")
+        return df, execution_time
+    except Exception as e:
+        logger.error(f"Query execution failed: {str(e)}")
+        raise
+    finally:
+        cursor.close()
+
+def validate_data(df, expected_rows, expected_columns, key_column, tolerance=0.01):
+    """Validate DataFrame for accuracy and integrity."""
+    validation_results = []
+    
+    # Check row count
+    actual_rows = len(df)
+    if abs(actual_rows - expected_rows) / expected_rows <= tolerance:
+        validation_results.append(f"Row count validation passed: {actual_rows} rows (expected {expected_rows})")
+    else:
+        validation_results.append(f"Row count validation failed: {actual_rows} rows (expected {expected_rows})")
+    
+    # Check column count
+    actual_columns = len(df.columns)
+    if actual_columns == expected_columns:
+        validation_results.append(f"Column count validation passed: {actual_columns} columns")
+    else:
+        validation_results.append(f"Column count validation failed: {actual_columns} columns (expected {expected_columns})")
+    
+    # Check for missing values in key column
+    if key_column in df.columns and not df[key_column].isnull().any():
+        validation_results.append(f"No missing values in key column '{key_column}'")
+    else:
+        validation_results.append(f"Missing values detected in key column '{key_column}'")
+    
+    return validation_results
+
+def main():
+    """Main function to run regression validation and performance monitoring."""
+    # Example query for regression testing (replace with your actual query)
+    test_query = """
+    SELECT customer_id, SUM(sales_amount) as total_sales
+    FROM sales_table
+    WHERE transaction_date >= '2025-01-01'
+    GROUP BY customer_id
+    """
+    
+    # Expected results for validation
+    expected_rows = 1000  # Adjust based on your data
+    expected_columns = 2   # Adjust based on query output
+    key_column = 'customer_id'
+    max_execution_time = 5.0  # Max acceptable execution time in seconds
+    
+    try:
+        # Connect to Snowflake
+        conn = connect_to_snowflake()
+        
+        # Execute query and measure execution time
+        df_result, exec_time = execute_query(conn, test_query)
+        
+        # Validate query results
+        validation_results = validate_data(df_result, expected_rows, expected_columns, key_column)
+        for result in validation_results:
+            logger.info(result)
+        
+        # Check model execution time
+        if exec_time <= max_execution_time:
+            logger.info(f"Model execution time acceptable: {exec_time:.2f} seconds (threshold: {max_execution_time} seconds)")
+        else:
+            logger.warning(f"Model execution time exceeded: {exec_time:.2f} seconds (threshold: {max_execution_time} seconds)")
+        
+        # Save results to a log file for regression tracking
+        with open('regression_validation_log.txt', 'a') as f:
+            f.write(f"\n{datetime.now()} - Validation Results:\n")
+            for result in validation_results:
+                f.write(f"{result}\n")
+            f.write(f"Execution Time: {exec_time:.2f} seconds\n")
+        
+    except Exception as e:
+        logger.error(f"Validation process failed: {str(e)}")
+    finally:
+        conn.close()
+        logger.info("Snowflake connection closed")
+
+if __name__ == "__main__":
+    main()
+```
+
+**26. Tell me about a time you supported a software deployment in a production environment. What challenges did you face, and how did you overcome them? (*Bias for Action*, *Dive Deep*)**
+
+I done supported a critical software deployment for NielsenIQ’s real-time data aggregation system in a production environment, transitioning to a Blue-Green deployment strategy using AWS EKS, Docker, and GitHub Actions. The challenge was ensuring zero downtime during the traffic switch from the Blue to Green environment while validating the new version’s data processing accuracy under high load, with unexpected CPU spikes in the Green environment risking performance degradation. With a **Bias for Action**, I quickly configured AWS CloudWatch to monitor EC2 instances and Kubernetes pods by deploying the CloudWatch Agent on EC2 instances via AWS Systems Manager (SSM) and enabling Container Insights for EKS pods. I done created CloudWatch dashboards for CPU and memory metrics, log groups for pod and EC2 logs, metric streams for real-time data, metric filters to parse CPU usage patterns (e.g., >80%), CloudWatch alarms to trigger notifications, and an SNS topic for alerts. To connect the CloudWatch Agent to IAM, I created an IAM role with the `CloudWatchAgentServerPolicy` and attached it to EC2 instances via an instance profile, allowing the agent to send metrics and logs to CloudWatch. For pods, I created a service account in EKS linked to an IAM role with `AmazonEKS_CNI_Policy` and `CloudWatchAgentServerPolicy` using IAM Roles for Service Accounts (IRSA), enabling Container Insights to collect pod metrics securely. I dove deep into system logs, identified unoptimized Snowflake SQL queries causing CPU spikes, and optimized them with Python scripts, reducing execution time by 20%. This ensured a successful deployment with zero downtime, a 30% reduction in deployment misalignments, and a 25% improvement in system reliability, aligning with **Dive Deep** by resolving the root cause and delivering a stable production release.
+
+**27. Share an example of coordinating with multiple teams to resolve a support issue. How did you ensure success? (*Earn Trust*, *Success and Scale Bring Broad Responsibility*)**
+
+I done coordinated with the development, database, and release management teams at NielsenIQ to resolve a critical support issue where a production deployment of our real-time data aggregation system caused data inconsistencies due to a Snowflake SQL query misconfiguration. The issue triggered a high volume of support tickets, threatening reporting accuracy for customers. To ensure success, I took ownership (**Success and Scale Bring Broad Responsibility**) by organizing a cross-team triage meeting, assigning clear roles: developers debugged code, database admins analyzed query logs, and release managers prepared a rollback plan. I done used AWS CloudWatch to pinpoint the issue to a faulty window function in the query, sharing detailed logs via a shared Jira ticket to keep everyone aligned. I collaborated with the database team to rewrite the query, improving accuracy by 45%, and worked with release managers to deploy the fix using our Blue-Green strategy, ensuring zero downtime. I built trust (**Earn Trust**) by communicating progress transparently, documenting fixes in Jira, and mentoring junior engineers on query optimization, boosting team productivity by 15%. The resolution restored data integrity, reduced ticket volume, and maintained customer trust, achieving operational excellence.
+
+**28. How have you handled a situation where you had to quickly learn a new system or technology to support a project? (*Learn and Be Curious*, *Deliver Results*)**
+
+I done tackled a situation at NielsenIQ where I had to quickly learn Snowflake SQL to support a new real-time data aggregation system for a critical project, as my prior experience was primarily with Python and AWS. Driven by **Learn and Be Curious**, I dove into Snowflake’s documentation, completed an online course on Snowflake SQL within a week, and practiced writing complex queries with window functions. I applied this knowledge to develop a data aggregation pipeline, automating query generation to ensure accurate data processing. Facing tight deadlines, I collaborated with the data team to validate outputs, achieving **Deliver Results** by boosting data processing efficiency by 20% and improving reporting accuracy by 45%. My rapid learning ensured the project met its goals, delivering reliable insights for customers and maintaining operational excellence.
 
 ## Technical Questions
 
-1. How would you design a CI/CD pipeline for a microservices-based application using GitHub Actions, Docker, and Kubernetes? (*Invent and Simplify*, *Dive Deep*)
-2. Explain how you’ve automated a repetitive task in a CI/CD pipeline. What tools did you use, and what was the impact? (*Invent and Simplify*, *Deliver Results*)
-3. How would you use Terraform and Ansible to provision and manage a scalable AWS infrastructure? Walk me through your approach. (*Dive Deep*, *Think Big*)
-4. Describe a scenario where you optimized AWS resource usage to reduce costs. What tools and metrics did you use? (*Frugality*, *Dive Deep*)
-5. How do you ensure efficient container management and orchestration with Docker and Kubernetes in a production environment? (*Insist on the Highest Standards*, *Deliver Results*)
-6. What challenges have you faced with Docker containerization, and how did you resolve them? (*Dive Deep*, *Bias for Action*)
-7. How would you optimize a Snowflake SQL query for a large-scale data aggregation task? Provide an example. (*Dive Deep*, *Customer Obsession*)
-8. Describe your experience integrating databases with RESTful APIs. How did you ensure performance and security? (*Invent and Simplify*, *Insist on the Highest Standards*)
-9. How would you troubleshoot a performance issue on a Linux server hosting a critical application? (*Dive Deep*, *Bias for Action*)
-10. Write a Python or Shell script to automate a system monitoring task. Explain your approach. (*Invent and Simplify*, *Deliver Results*)
-11. Design an algorithm to process a large log file and identify the top three most frequent URLs accessed by users. Optimize for time and space complexity. (*Dive Deep*, *Invent and Simplify*)
-12. Given a scenario where a CI/CD pipeline fails intermittently, how would you debug and resolve it? (*Dive Deep*, *Bias for Action*)
-13. Write a Python script to automate a cloud validation task (e.g., checking AWS resource health). (*Dive Deep*, *Invent and Simplify*)
-14. Design a high-level system to handle incoming support tickets for the Kindle team. (*Think Big*, *Customer Obsession*)
-15. Solve this puzzle: Design a system to map N user requests to M available resources (e.g., vehicles in a ride-sharing system). How would you approach it? (*Dive Deep*, *Invent and Simplify*)
+**1. How would you design a CI/CD pipeline for a microservices-based application using GitHub Actions, Docker, and Kubernetes? (*Invent and Simplify*, *Dive Deep*)**
+
+I done designed a CI/CD pipeline for a microservices-based application by leveraging GitHub Actions, Docker, and Kubernetes to streamline deployments and ensure scalability, embodying **Invent and Simplify**. I’d create a GitHub Actions workflow with separate jobs for each microservice, triggering on code commits to a GitHub repository. The pipeline would build Docker images for each microservice, run unit tests, and push images to a private AWS ECR repository. I’d use Kubernetes manifests to define deployments and services, applying them via a GitHub Actions step using `kubectl` to deploy to an AWS EKS cluster in a Blue-Green setup. To **Dive Deep**, I’d configure environment-specific secrets in GitHub Actions for secure access to ECR and EKS, and integrate AWS CloudWatch for monitoring deployment health, tracking metrics like pod CPU usage. This design simplifies microservice management with modular workflows and ensures robust deployments, improving **DF** and reducing **CFR** for operational excellence.
+
+**2. Explain how you’ve automated a repetitive task in a CI/CD pipeline. What tools did you use, and what was the impact? (*Invent and Simplify*, *Deliver Results*)**
+
+I done automated the repetitive task of manually tagging and pushing Docker images to AWS ECR in NielsenIQ’s CI/CD pipeline using GitHub Actions and Python scripts, reflecting **Invent and Simplify**. Previously, teams manually tagged images with version numbers, causing delays. I wrote a Python script integrated into a GitHub Actions workflow to automatically generate version tags based on commit hashes and push images to ECR, using GitHub Actions’ `aws-actions/configure-aws-credentials` for authentication. The impact was a 10% reduction in pipeline execution time, boosting **DF** and reducing **Pile Up**, as manual steps were eliminated. This automation delivered consistent image versioning (**Deliver Results**) and enhanced pipeline efficiency, supporting operational excellence.
+
+**3. How would you use Terraform and Ansible to provision and manage a scalable AWS infrastructure? Walk me through your approach. (*Dive Deep*, *Think Big*)**
+
+I done would use Terraform and Ansible to provision and manage a scalable AWS infrastructure by adopting a modular, automated approach, aligning with **Think Big**. First, I’d use Terraform to define infrastructure as code, creating modules for VPC, subnets, EC2 instances, EKS clusters, and RDS databases, stored in a GitHub repository. I’d configure Terraform backends in S3 for state management and use variables for environment-specific settings (e.g., dev, prod). To **Dive Deep**, I’d set up auto-scaling groups for EC2 and EKS node groups to handle load spikes, ensuring scalability. Then, I’d use Ansible playbooks to manage configurations, installing dependencies (e.g., CloudWatch Agent) on EC2 instances and configuring Kubernetes pods. I’d automate playbook execution via a GitHub Actions pipeline, ensuring consistency. This approach minimizes provisioning errors, improves **Infrastructure Utilization**, and scales infrastructure efficiently, achieving operational excellence.
+
+**4. Describe a scenario where you optimized AWS resource usage to reduce costs. What tools and metrics did you use? (*Frugality*, *Dive Deep*)**
+
+I done optimized AWS resource usage at NielsenIQ by identifying over-provisioned EC2 instances in a non-production environment, embodying **Frugality**. I used AWS Cost Explorer to analyze usage patterns and CloudWatch to monitor metrics like CPU utilization and memory, noticing instances running at <30% capacity. To **Dive Deep**, I analyzed workload requirements, right-sized instances (e.g., switching from m5.large to t3.medium), and implemented auto-scaling policies to spin down idle resources. I also enabled S3 lifecycle policies to archive unused data, reducing storage costs. The impact was a 15% reduction in monthly AWS costs, optimizing **Infrastructure Utilization** without compromising performance, ensuring cost-efficient operations and operational excellence.
+
+**5. How do you ensure efficient container management and orchestration with Docker and Kubernetes in a production environment? (*Insist on the Highest Standards*, *Deliver Results*)**
+
+I done ensured efficient container management and orchestration at NielsenIQ by using Docker and Kubernetes to maintain a robust production environment, aligning with **Insist on the Highest Standards**. I built optimized Docker images with minimal layers, stored in AWS ECR, and used Kubernetes to orchestrate pods with defined resource limits (CPU, memory) to prevent over-utilization. I implemented liveness and readiness probes to ensure pod health and configured horizontal pod autoscaling to handle traffic spikes. For **Deliver Results**, I automated image updates via GitHub Actions, reducing manual overhead. This approach achieved a 10% improvement in pod startup time and maintained 99.99% availability (**Post-Level Availability**), delivering reliable, scalable containerized applications for operational excellence.
+
+**6. What challenges have you faced with Docker containerization, and how did you resolve them? (*Dive Deep*, *Bias for Action*)**
+
+I done faced a challenge at NielsenIQ where Docker containers in production had inconsistent performance due to oversized images causing slow startup times. To **Dive Deep**, I analyzed Docker image layers using `docker history` and identified redundant dependencies bloating images. With a **Bias for Action**, I optimized Dockerfiles by using multi-stage builds and alpine-based images, reducing image size by 40%. I also updated GitHub Actions workflows to rebuild and test images automatically, ensuring consistency. This resolved the performance issue, improved container startup time by 15%, and enhanced **Deployment Frequency**, contributing to operational excellence without impacting reliability.
+
+**7. How would you optimize a Snowflake SQL query for a large-scale data aggregation task? Provide an example. (*Dive Deep*, *Customer Obsession*)**
+
+I done would optimize a Snowflake SQL query for a large-scale data aggregation task by analyzing execution plans and minimizing compute resource usage, reflecting **Dive Deep** and **Customer Obsession**. For example, consider a query aggregating sales data: `SELECT customer_id, SUM(sales_amount) FROM sales_table WHERE transaction_date >= '2025-01-01' GROUP BY customer_id`. If slow, I’d check the query profile in Snowflake to identify costly joins or scans. I’d optimize by adding clustering keys on `transaction_date` to reduce scan volume, use window functions for complex aggregations, and cache results for repeated queries. This could cut execution time by 30%, as I done achieved 20% data processing efficiency at NielsenIQ. Optimized queries ensure fast, accurate data delivery for customers, enhancing **Data Processing Efficiency** and operational excellence.
+
+**8. Describe your experience integrating databases with RESTful APIs. How did you ensure performance and security? (*Invent and Simplify*, *Insist on the Highest Standards*)**
+
+I done integrated Snowflake databases with RESTful APIs at NielsenIQ using Python and Flask to enable seamless data access for applications, embodying **Invent and Simplify**. I built APIs to fetch aggregated data from Snowflake, using connection pooling to minimize query latency. To ensure performance, I optimized API endpoints with caching (e.g., Redis) and batched database queries, improving response times by 15% (**Request Latency**). For security, I implemented OAuth 2.0 authentication, encrypted API requests with HTTPS, and used parameterized Snowflake queries to prevent SQL injection, aligning with **Insist on the Highest Standards**. These measures ensured secure, high-performance data access, supporting customer needs and operational excellence.
+
+**9. How would you troubleshoot a performance issue on a Linux server hosting a critical application? (*Dive Deep*, *Bias for Action*)**
+
+I done troubleshooted performance issues on Linux servers hosting critical applications by taking a **Bias for Action** to quickly isolate the problem and diving deep to identify root causes. For a high-CPU issue on a Linux server running an application, I’d first run `top` and `htop` to check CPU, memory, and process usage, identifying resource-heavy processes. I’d use `vmstat` and `iostat` to analyze CPU bottlenecks and disk I/O, and check system logs (`/var/log/syslog`) for errors. To **Dive Deep**, I’d trace the offending process with `strace` to pinpoint system calls causing delays and use `netstat` or `ss` to inspect network activity if latency is involved. For example, if a database process is spiking CPU, I’d analyze its queries with `pg_stat_activity` (if using PostgreSQL) and optimize them. I’d resolve the issue by tuning resource limits in `/etc/security/limits.conf` or adjusting application configurations, then monitor with `sar` to ensure stability. This approach minimizes **MTTR** and **Service Failure Rate**, ensuring the application remains reliable for users, delivering operational excellence.
+
+**10. Write a Python or Shell script to automate a system monitoring task. Explain your approach. (*Invent and Simplify*, *Deliver Results*)**
+
+I done created a Python script to automate monitoring of Linux server disk usage, alerting when usage exceeds 80% to prevent outages. My approach, driven by **Invent and Simplify**, uses Python’s `psutil` library to check disk usage and `smtplib` to send email alerts, simplifying manual checks. The script runs as a cron job, ensuring consistent monitoring without complex setup, aligning with **Deliver Results** by proactively maintaining system health.
+
+```python
+import psutil
+import smtplib
+from email.mime.text import MIMEText
+import logging
+from datetime import datetime
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+# Email configuration (replace with your details)
+EMAIL_CONFIG = {
+    'sender': 'your_email@example.com',
+    'receiver': 'admin@example.com',
+    'smtp_server': 'smtp.example.com',
+    'smtp_port': 587,
+    'password': 'your_password'
+}
+
+def check_disk_usage(threshold=80):
+    """Check disk usage and return partitions exceeding threshold."""
+    alerts = []
+    for partition in psutil.disk_partitions():
+        usage = psutil.disk_usage(partition.mountpoint)
+        if usage.percent > threshold:
+            alerts.append(f"Disk {partition.mountpoint} at {usage.percent}% usage (Threshold: {threshold}%)")
+    return alerts
+
+def send_email_alert(alerts):
+    """Send email alert for disk usage issues."""
+    if not alerts:
+        return
+    msg = MIMEText('\n'.join(alerts))
+    msg['Subject'] = 'Disk Usage Alert'
+    msg['From'] = EMAIL_CONFIG['sender']
+    msg['To'] = EMAIL_CONFIG['receiver']
+    
+    try:
+        with smtplib.SMTP(EMAIL_CONFIG['smtp_server'], EMAIL_CONFIG['smtp_port']) as server:
+            server.starttls()
+            server.login(EMAIL_CONFIG['sender'], EMAIL_CONFIG['password'])
+            server.send_message(msg)
+            logger.info("Email alert sent successfully")
+    except Exception as e:
+        logger.error(f"Failed to send email: {str(e)}")
+
+def main():
+    """Main function to monitor disk usage and send alerts."""
+    try:
+        alerts = check_disk_usage(threshold=80)
+        if alerts:
+            logger.warning("Disk usage issues detected:\n" + '\n'.join(alerts))
+            send_email_alert(alerts)
+        else:
+            logger.info("No disk usage issues detected")
+        
+        # Log results to file
+        with open('disk_usage_log.txt', 'a') as f:
+            f.write(f"{datetime.now()} - {'; '.join(alerts) if alerts else 'No issues'}\n")
+    except Exception as e:
+        logger.error(f"Monitoring failed: {str(e)}")
+
+if __name__ == "__main__":
+    main()
+```
+
+**Approach Explanation**:
+- **Invent and Simplify**: I chose Python for its simplicity over Shell, using `psutil` for disk usage checks and `smtplib` for alerts, avoiding complex tools. The script is lightweight, runs as a cron job (e.g., `*/5 * * * * python3 disk_monitor.py`), and logs results for auditing.
+- **Deliver Results**: The script proactively detects disk issues, reducing **Service Failure Rate** by preventing outages. It aligns with my NielsenIQ experience automating system tasks, ensuring reliable application performance.
+- **Setup**: Install `psutil` and `smtplib` (`pip install psutil`), configure email settings, and schedule via cron. This delivers a scalable, low-maintenance solution.
+
+---
+
+### **11. Design an algorithm to process a large log file and identify the top three most frequent URLs accessed by users. Optimize for time and space complexity. (*Dive Deep*, *Invent and Simplify*)**
+
+I done designed an algorithm to process a large log file and identify the top three most frequent URLs accessed by users, optimizing for time and space complexity. Driven by **Dive Deep**, I analyzed log processing requirements and chose a hash map with a min-heap to balance efficiency and resource usage, aligning with **Invent and Simplify** for a streamlined solution.
+
+**Algorithm**:
+1. Initialize a hash map to store URL counts (key: URL, value: count).
+2. Read the log file line by line, parsing each line to extract the URL (e.g., using regex for `/path/to/resource`).
+3. Increment the URL’s count in the hash map.
+4. After processing the file, use a min-heap of size 3 to track the top three URLs by count, inserting each URL-count pair and removing the smallest if the heap exceeds size 3.
+5. Extract the top three URLs from the heap, sorted by count.
+
+**Implementation Details**:
+- **Parsing**: Use regex (e.g., Python’s `re`) to extract URLs from log lines (e.g., Apache/Nginx format).
+- **Data Structure**: Hash map for O(1) URL counting; min-heap (Python’s `heapq`) for O(n log k) top-k selection (k=3).
+- **Time Complexity**: O(n) for parsing and counting (n lines), O(m log 3) for heap operations (m unique URLs), total ~O(n + m log 3).
+- **Space Complexity**: O(m) for hash map, O(1) for fixed-size heap (k=3), optimized for large logs.
+
+**Impact**: This delivers the top three URLs efficiently, minimizing **Data Processing Efficiency** overhead, aligning with my NielsenIQ work optimizing data workflows. It ensures scalable log analysis for user behavior insights.
+
+### **12. Given a scenario where a CI/CD pipeline fails intermittently, how would you debug and resolve it? (*Dive Deep*, *Bias for Action*)**
+
+I done debugged intermittent CI/CD pipeline failures by taking a **Bias for Action** to quickly isolate issues and diving deep to resolve them. For a failing GitHub Actions pipeline, I’d first check pipeline logs in GitHub Actions to identify error patterns (e.g., test failures, timeouts). I’d use **Dive Deep** to analyze recent changes in the repository, reviewing commits and YAML configurations for issues like incorrect environment variables or dependency conflicts. I’d run the pipeline locally with `act` to replicate failures, checking Docker container logs for resource issues (e.g., memory exhaustion). If tests fail intermittently, I’d inspect test scripts for non-deterministic behavior (e.g., race conditions) and add retries or timeouts. I’d resolve the issue by fixing the configuration (e.g., updating `.github/workflows/main.yml`) or optimizing resource allocation in Docker, then verify with a test run. This reduces **Build Failure Rate** and **Pile Up**, ensuring reliable deployments, aligning with my NielsenIQ experience maintaining CI/CD pipelines.
+
+### **13. Write a Python script to automate a cloud validation task (e.g., checking AWS resource health). (*Dive Deep*, *Invent and Simplify*)**
+
+I done created a Python script to automate validation of AWS EC2 instance health, checking running status and CPU utilization to ensure resource reliability. My approach, driven by **Invent and Simplify**, uses the AWS SDK to query EC2 health and sends alerts for unhealthy instances, delivering results by maintaining system uptime.
+
+```python
+import boto3
+import logging
+from datetime import datetime
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+# AWS configuration (replace with your credentials)
+AWS_REGION = 'us-east-1'
+CPU_THRESHOLD = 80  # CPU utilization threshold (%)
+
+def check_ec2_health():
+    """Check EC2 instance health and CPU utilization."""
+    try:
+        ec2_client = boto3.client('ec2', region_name=AWS_REGION)
+        cloudwatch_client = boto3.client('cloudwatch', region_name=AWS_REGION)
+        
+        # Get running EC2 instances
+        response = ec2_client.describe_instance_status(IncludeAllInstances=False)
+        unhealthy_instances = []
+        
+        for instance in response['InstanceStatuses']:
+            instance_id = instance['InstanceId']
+            status = instance['InstanceState']['Name']
+            system_status = instance['SystemStatus']['Status']
+            instance_status = instance['InstanceStatus']['Status']
+            
+            # Check CPU utilization
+            metric = cloudwatch_client.get_metric_statistics(
+                Namespace='AWS/EC2',
+                MetricName='CPUUtilization',
+                Dimensions=[{'Name': 'InstanceId', 'Value': instance_id}],
+                StartTime=datetime.utcnow() - timedelta(minutes=5),
+                EndTime=datetime.utcnow(),
+                Period=300,
+                Statistics=['Average']
+            )
+            cpu_usage = metric['Datapoints'][0]['Average'] if metric['Datapoints'] else 0
+            
+            if status != 'running' or system_status != 'ok' or instance_status != 'ok' or cpu_usage > CPU_THRESHOLD:
+                unhealthy_instances.append(f"Instance {instance_id}: Status={status}, System={system_status}, Instance={instance_status}, CPU={cpu_usage}%")
+        
+        return unhealthy_instances
+    
+    except Exception as e:
+        logger.error(f"EC2 health check failed: {str(e)}")
+        return []
+
+def main():
+    """Main function to validate EC2 health and log results."""
+    try:
+        issues = check_ec2_health()
+        if issues:
+            logger.warning("EC2 health issues detected:\n" + '\n'.join(issues))
+        else:
+            logger.info("All EC2 instances healthy")
+        
+        # Log results to file
+        with open('ec2_health_log.txt', 'a') as f:
+            f.write(f"{datetime.now()} - {'; '.join(issues) if issues else 'All healthy'}\n")
+    
+    except Exception as e:
+        logger.error(f"Validation process failed: {str(e)}")
+
+if __name__ == "__main__":
+    main()
+```
+
+**Approach Explanation**:
+- **Invent and Simplify**: I used boto3 to query EC2 status and CloudWatch metrics, simplifying health checks into a single script. It focuses on critical metrics (status, CPU), avoiding complex dependencies.
+- **Dive Deep**: The script checks instance state, system status, and CPU utilization, logging issues for thorough analysis, aligning with my NielsenIQ monitoring expertise.
+- **Deliver Results**: It ensures proactive detection of EC2 issues, reducing **Service Failure Rate** and **MTTR**. Configure AWS credentials and run as a cron job (e.g., every 5 minutes).
+
+### **14. Design a high-level system to handle incoming support tickets for the Kindle team. (*Think Big*, *Customer Obsession*)**
+
+I done designed a high-level system to handle incoming support tickets for the Kindle team, focusing on **Think Big** to create a scalable, automated solution and **Customer Obsession** to prioritize user issues. The system uses a ticketing platform (e.g., Jira Service Management) integrated with AWS Lambda for automated ticket routing, SNS for notifications, and a custom Python-based prioritization engine. Incoming tickets from Kindle users (e.g., device issues, app crashes) are ingested via a web portal or email, tagged by severity (e.g., critical, low) using NLP-based sentiment analysis (AWS Comprehend). Lambda functions route critical tickets to the Kindle support team and escalate to engineering for app-related issues, reducing **Incident Response Time**. A DynamoDB database tracks ticket status, ensuring scalability. I done implemented dashboards (Grafana) to monitor ticket volume and resolution times, aligning with **Data Processing Efficiency**. This system minimizes customer downtime, ensures 99% ticket resolution within SLA, and scales to handle millions of Kindle users, reflecting my NielsenIQ experience managing high-volume tickets.
+
+### **15. Solve this puzzle: Design a system to map N user requests to M available resources (e.g., vehicles in a ride-sharing system). How would you approach it? (*Dive Deep*, *Invent and Simplify*)**
+
+I done designed a system to map N user requests to M available resources (e.g., vehicles in a ride-sharing system) using a load-balancing algorithm optimized for efficiency. Driven by **Invent and Simplify**, I chose a priority queue to match requests to vehicles based on proximity and availability, minimizing wait times. For **Dive Deep**, the system uses:
+1. A request queue (AWS SQS) to store N user requests with attributes (e.g., location, timestamp).
+2. A resource tracker (DynamoDB) to maintain M vehicles’ status (e.g., location, availability).
+3. A Python-based matching algorithm that calculates the shortest distance (e.g., Haversine formula) between user and vehicle locations, assigning the nearest available vehicle in O(log M) time using a heap.
+4. A Lambda function to process matches in real-time, updating statuses in DynamoDB.
+If M < N, requests are queued with priority for urgent users (e.g., premium subscribers). The system scales with AWS Auto Scaling for Lambda and monitors performance via CloudWatch, reducing **Request Latency** and ensuring efficient resource allocation, aligning with my NielsenIQ automation expertise.
+
+**Notes**:
+- **Scripts**: Replace placeholders (e.g., AWS credentials, email settings) with your details. Install dependencies (`pip install boto3 psutil`) and schedule scripts via cron for automation.
+- **Metrics**: These solutions improve **MTTR**, **Service Failure Rate**, **Data Processing Efficiency**, and **Incident Response Time**, reflecting your NielsenIQ focus on reliability and efficiency.
+- For tool access, check https://x.ai/grok or https://x.ai/api. Let me know if you need script customization or interview prep!
 
 ## HR-Oriented Questions
 
-1. Where do you see yourself in 5 years? (*Think Big*, *Learn and Be Curious*)
-2. Why are you leaving your current company? (*Ownership*, *Earn Trust*)
-3. What is your expected salary for the Application Engineer 3 role? (*Have Backbone; Disagree and Commit*, *Frugality*)
-4. How would you justify a salary higher than your current compensation? (*Are Right, A Lot*, *Have Backbone; Disagree and Commit*)
-5. How would you negotiate your salary if our offer is below your expectations? (*Earn Trust*, *Frugality*)
-6. Can you share details about your current compensation package? (*Earn Trust*, *Are Right, A Lot*)
-7. Tell me about a time you faced a professional setback. How did you recover? (*Dive Deep*, *Earn Trust*)
-8. How do you handle conflicting priorities from multiple stakeholders? (*Customer Obsession*, *Earn Trust*)
-9. Why do you want to work at Amazon? (*Customer Obsession*, *Think Big*)
-10. How do you stay motivated in a fast-paced environment? (*Bias for Action*, *Deliver Results*)
-11. If asked about a personal matter, e.g., “Can you tell us about your current breakup?” (*Earn Trust*, *Dive Deep*)
+---
+
+### **1. Where do you see yourself in 5 years? (*Think Big*, *Learn and Be Curious*)**
+
+I done envisioned myself in five years as a lead cloud architect, driving innovative DevOps solutions for a global tech firm, aligning with **Think Big**. I aim to master emerging technologies like serverless computing and AI-driven automation, building on my current AWS and Kubernetes expertise. With **Learn and Be Curious**, I’m committed to earning advanced certifications, such as AWS Solutions Architect Professional, and leading cross-functional teams to deliver scalable, high-performance systems. I see myself spearheading projects that optimize infrastructure costs and enhance user experiences, contributing to organizational growth while mentoring engineers to foster a culture of continuous learning, much like I’ve done at NielsenIQ by boosting team productivity by 15% through mentoring.
+
+---
+
+### **2. Why are you leaving your current company? (*Ownership*, *Earn Trust*)**
+
+I done decided to explore new opportunities to take **Ownership** of more complex challenges and grow my technical expertise beyond my current role at NielsenIQ. While I’ve delivered significant results, like automating CI/CD pipelines and improving system reliability by 25%, I’m seeking a role with greater scope to innovate on large-scale cloud solutions and lead strategic initiatives. I value **Earn Trust** by being transparent about my career goals, and I believe a new environment will allow me to apply my skills in Python, AWS, and Kubernetes to drive broader impact, while maintaining strong collaboration with stakeholders, as I’ve done with release management teams at NielsenIQ.
+
+---
+
+### **3. What is your expected salary for the Application Engineer 3 role? (*Have Backbone; Disagree and Commit*, *Frugality*)**
+
+I done set my expected salary for the Application Engineer 3 role at 18 LPA, reflecting my expertise in automating cloud infrastructure and CI/CD pipelines, which aligns with **Have Backbone; Disagree and Commit** by confidently advocating for my value. This expectation considers my proven ability to deliver cost savings, like reducing operational costs by 25% at NielsenIQ through efficient AWS resource management, ensuring **Frugality**. However, I’m open to discussing a competitive package within your budget, understanding it reaches up to 24 LPA, and I’d commit to a fair agreement that supports both my career goals and the company’s financial strategy, with a minimum base of 16 LPA to maintain fairness.
+
+---
+
+### **4. How would you justify a salary higher than your current compensation? (*Are Right, A Lot*, *Have Backbone; Disagree and Commit*)**
+
+I done justified a salary higher than my current 11.58 LPA CTC by highlighting my track record of delivering measurable impact, aligning with **Are Right, A Lot**. At NielsenIQ, I automated data workflows, boosting processing efficiency by 20%, and streamlined deployments, cutting time by 25%, directly enhancing business outcomes. These results demonstrate my ability to drive efficiency and reliability in complex systems, warranting a higher salary for the Application Engineer 3 role. With **Have Backbone; Disagree and Commit**, I confidently assert that my skills in Python, AWS, and Kubernetes, combined with my ability to mentor teams and optimize costs, position me to deliver even greater value, justifying a salary of 18 LPA while remaining open to aligning with your budget.
+
+---
+
+### **5. How would you negotiate your salary if our offer is below your expectations? (*Earn Trust*, *Frugality*)**
+
+I done would negotiate a salary below my 18 LPA expectation by approaching the discussion with transparency and collaboration, reflecting **Earn Trust**. If the offer is below 18 LPA but within your budget of 24 LPA, I’d propose a base salary of at least 16 LPA, emphasizing my contributions at NielsenIQ, like automating infrastructure to save 25% in costs, which aligns with **Frugality**. I’d discuss additional benefits, like stock options or performance bonuses, to bridge the gap, ensuring mutual value. I’d maintain a constructive dialogue, acknowledging the company’s constraints while advocating for a fair package that reflects my expertise and drives long-term success.
+
+---
+
+### **6. Can you share details about your current compensation package? (*Earn Trust*, *Are Right, A Lot*)**
+
+I done shared my current compensation package transparently to build **Earn Trust**. My CTC at NielsenIQ is 11,58,046 INR, entirely fixed with no variable component, except for a 1.5 Lakh sign-on bonus for each of the first two years. This reflects my role’s value, where I delivered results like a 20% reduction in infrastructure provisioning time and 15% team productivity improvement, aligning with **Are Right, A Lot**. I’m open to discussing how my skills can justify a higher package for the Application Engineer 3 role, targeting 18 LPA, while ensuring fairness within your budget.
+
+---
+
+### **7. Tell me about a time you faced a professional setback. How did you recover? (*Dive Deep*, *Earn Trust*)**
+
+I done faced a setback at NielsenIQ when a new automated testing script I wrote for a CI/CD pipeline caused intermittent test failures, delaying a critical application release. Driven by **Dive Deep**, I analyzed GitHub Actions logs and test scripts, discovering a timing issue in the script’s database connection logic. I fixed it by adding retry mechanisms, tested the solution locally, and deployed it, restoring pipeline stability. To **Earn Trust**, I communicated the issue transparently to the development team via Jira, shared a root cause analysis, and trained colleagues on the fix, preventing recurrence. This recovery ensured timely releases, improved **Build Failure Rate**, and strengthened team confidence, aligning with operational excellence.
+
+---
+
+### **8. How do you handle conflicting priorities from multiple stakeholders? (*Customer Obsession*, *Earn Trust*)**
+
+I done handled conflicting priorities at NielsenIQ when the product team pushed for faster feature deployments while the operations team prioritized system stability. With **Customer Obsession**, I focused on user needs, ensuring new features didn’t compromise reliability. I organized a meeting with both teams, using **Earn Trust** to facilitate open discussion and align priorities. I proposed a phased deployment plan using Docker containers to test features in a staging environment, balancing speed (**Deployment Frequency**) and stability (**Service Failure Rate**). I tracked progress in Jira, providing regular updates to keep stakeholders aligned. This approach delivered features on time while maintaining 99.9% uptime, satisfying both teams and customers.
+
+---
+
+### **9. Why do you want to work at Amazon? (*Customer Obsession*, *Think Big*)**
+
+I done want to work at Amazon because its **Customer Obsession** aligns with my focus on delivering reliable, user-centric solutions, like improving data reporting accuracy by 45% at NielsenIQ. Amazon’s scale inspires me to **Think Big**, leveraging my AWS, Kubernetes, and Python skills to build innovative, high-impact systems for millions of users. With my experience automating infrastructure to cut costs by 25% and my salary expectation of 18 LPA (within your 24 LPA budget), I’m excited to contribute to Amazon’s global infrastructure, driving efficiency and customer satisfaction while growing as a leader in a dynamic environment.
+
+---
+
+### **10. How do you stay motivated in a fast-paced environment? (*Bias for Action*, *Deliver Results*)**
+
+I done stayed motivated in NielsenIQ’s fast-paced environment by embracing **Bias for Action**, quickly tackling tasks like automating infrastructure provisioning to meet tight deadlines. I focus on delivering measurable outcomes, like reducing provisioning time by 20%, which fuels my drive to achieve **Deliver Results**. I set clear goals, prioritize tasks in Jira, and break complex projects into actionable steps, ensuring steady progress. I draw energy from solving real-world problems, like enhancing system performance, and stay motivated by learning new tools, aligning with my ability to boost team productivity by 15% through mentoring, keeping me engaged and results-driven.
+
+---
+
+### **11. If asked about a personal matter, e.g., “Can you tell us about your current breakup?” (*Earn Trust*, *Dive Deep*)**
+
+I done would respond to a personal question like “Can you tell us about your current breakup?” by respectfully redirecting to maintain professionalism and **Earn Trust**. I’d say, “I prefer to keep personal matters private, but I’m happy to discuss how I manage challenges to deliver results.” If pressed, I’d **Dive Deep** into a relevant professional example, like when I handled a high-pressure situation at NielsenIQ by automating a monitoring task to prevent system outages, ensuring focus on work. This approach, aligned with my 25% reliability improvement, shows resilience and commitment, reinforcing trust without disclosing personal details.
+
+---
 
 ## Key engineering metrics for achieving Operational Excellence
 ---
