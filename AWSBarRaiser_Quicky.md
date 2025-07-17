@@ -31,6 +31,147 @@ DevOps and Data Engineering professional with expertise in AWS, Kubernetes, Terr
 
 ---
 
+### **Amazon’s Leadership Principles**
+1. **Customer Obsession**: Prioritize customer needs (e.g., 45% improved reporting accuracy for client analytics).
+2. **Ownership**: Act for the company’s benefit (e.g., led end-to-end model development).
+3. **Invent and Simplify**: Streamlined CI/CD pipelines and Snowflake queries.
+4. **Are Right, A Lot**: Made data-driven decisions in query optimization.
+5. **Learn and Be Curious**: Pursued AWS and Kubernetes expertise.
+6. **Hire and Develop the Best**: Mentored team, boosting productivity by 15%.
+7. **Insist on Highest Standards**: Achieved error-free deployments.
+8. **Think Big**: Designed scalable data aggregation systems.
+9. **Bias for Action**: Quickly resolved CPU spikes in production.
+10. **Frugality**: Reduced infrastructure costs by 25%.
+11. **Earn Trust**: Built trust through transparent communication.
+12. **Dive Deep**: Analyzed logs to fix deployment issues.
+13. **Have Backbone; Disagree and Commit**: Guided team on model logic.
+14. **Deliver Results**: Improved reliability by 25% and processing by 20%.
+15. **Strive to Be Earth’s Best Employer**: Fostered team growth.
+16. **Success and Scale**: Took responsibility for scalable solutions.
+
+---
+
+### **Measuring Success**
+- **Customer-Centric Metrics**: 45% improved model consistency, faster report delivery.
+- **Technical Performance**: 20% faster Snowflake queries, 30% fewer deployment errors.
+- **Operational Efficiency**: 15% team productivity increase, 25% cost reduction.
+- **Client Feedback**: Ensured satisfaction via reliable analytics.
+- **Continuous Improvement**: Set up CloudWatch for proactive monitoring.
+
+### **Blue-Green Deployment Process**
+- **Code Commit**: Developers push to GitHub/Bitbucket.
+- **CI/CD Trigger**: GitHub Actions builds/tests Docker containers.
+- **Green Deployment**: New version deployed to Green environment (Kubernetes/EKS).
+- **Validation**: Test Green environment with CloudWatch monitoring.
+- **Traffic Switch**: Route traffic to Green via AWS ELB/Kubernetes Ingress.
+- **Monitoring**: Track metrics (CPU, latency) in CloudWatch.
+- **Rollback**: Switch back to Blue if issues arise.
+
+**Metrics Impact**:
+- **Deployment Frequency (DF)**: Faster via automation.
+- **Lead Time for Changes (LTTC)**: Reduced by 25%.
+- **Change Failure Rate (CFR)**: Eliminated errors.
+- **Mean Time to Restore (MTTR)**: Minimized via rollback.
+- **Post-Level Availability**: Ensured via zero-downtime switch.
+
+---
+
+### **Career Goals (5 Years)**
+- **Vision**: Lead Cloud Architect, driving innovative DevOps solutions.
+- **Plan**: Master serverless computing, AI-driven automation, and earn AWS Solutions Architect Professional certification.
+- **Impact**: Optimize infrastructure costs, enhance user experiences, and mentor teams, building on 15% productivity gains at NielsenIQ.
+
+---
+
+### **Why Leave Current Role?**
+- Seeking complex challenges to grow expertise in large-scale cloud solutions.
+- Delivered 25% faster deployments and 25% cost reductions at NielsenIQ but want broader impact.
+- Maintain trust through transparency about career goals.
+
+---
+
+### **Why Amazon?**
+- Aligns with **Customer Obsession** via reliable solutions (e.g., 45% reporting accuracy).
+- Inspires **Think Big** with global-scale systems using AWS, Kubernetes, and Python.
+- Salary expectation: 18 LPA (within 24 LPA budget).
+- Opportunity to drive efficiency and customer satisfaction.
+
+---
+
+### **Primary Metrics**
+- **Deployment Frequency (DF)**: Track via GitHub Actions for rapid delivery.
+- **Lead Time for Changes (LTTC)**: Monitor via Git logs (hours).
+- **Change Failure Rate (CFR)**: Low (0–15%) via incident tools.
+- **Mean Time to Restore (MTTR)**: <1 hour via CloudWatch.
+- **Service Failure Rate**: Low via Prometheus/Grafana.
+- **Post-Level Availability**: 99.99% via Grafana SLOs.
+- **Request Latency**: <200ms via CloudWatch.
+- **Error Rate**: Low via ELK/Splunk.
+- **CSAT/NPS**: High via client surveys.
+
+**Secondary Metrics**:
+- **Pile Up**: Minimal via CI/CD queue tracking.
+- **Backup Rate**: Reliable via backup logs.
+- **Clearance Sale**: Resolve technical debt via Jira.
+- **Canary/Non-Canary**: Compare via Grafana.
+- **Deployment for Zone**: Consistent via CloudWatch.
+- **Identify the Pattern**: Detect trends via Grafana/Prometheus.
+- **Code Review Time**: Fast via GitHub.
+- **Test Coverage**: >80% via Codecov.
+- **Infrastructure Utilization**: Optimize via Grafana (CPU, memory).
+- **CPU Spiking Up**: Detect via CloudWatch/Grafana.
+- **Ring-Based Deployments**: Stable via Kubernetes.
+- **Last Successful Control**: Track via Grafana.
+- **Incident Response Time**: Fast via OpsGenie.
+- **Build Failure Rate**: Low via GitHub Actions.
+
+---
+
+### **Improving Operations**
+- **CI/CD Optimization**: Reduced deployment time by 25% and misalignments by 30%.
+- **Containerization**: Eliminated errors via Docker/Kubernetes.
+- **Infrastructure Automation**: Cut provisioning time by 20% and costs by 25% with Terraform/Ansible.
+- **Monitoring**: Improved reliability by 25% with CloudWatch.
+- **Data Processing**: Boosted efficiency by 20% and accuracy by 45% with Snowflake/Python.
+- **Team Mentoring**: Increased productivity by 15%.
+- **API Development**: Enhanced communication with Flask APIs.
+
+---
+
+### **Deployment Strategies**
+1. **Blue-Green (Used)**:
+   - Two environments (Blue: current, Green: new).
+   - Zero downtime, low MTTR, high availability.
+   - Tools: AWS ELB, Kubernetes, Terraform, CloudWatch.
+2. **Canary**:
+   - Gradual rollout to small user subset.
+   - Reduces CFR via early issue detection.
+3. **Rolling**:
+   - Incremental pod updates in Kubernetes.
+   - Resource-efficient but risks compatibility issues.
+4. **Feature Flag**:
+   - Hide features behind toggles.
+   - Flexible, reduces CFR via selective rollout.
+5. **A/B Testing**:
+   - Compare versions for user feedback.
+   - Improves CSAT/NPS.
+6. **Shadow**:
+   - Test new version with duplicated traffic.
+   - Safe, reduces CFR without user impact.
+7. **Recreate**:
+   - Terminate old version, deploy new.
+   - High risk, not used due to downtime.
+
+**Comparison with Blue-Green**:
+- **Canary**: Safer for testing, slower LTTC.
+- **Rolling**: Resource-efficient, risks disruptions.
+- **Feature Flag**: Ideal for feature releases.
+- **A/B**: User-focused, complements data systems.
+- **Shadow**: Safe testing, high resource use.
+- **Recreate**: Unsuitable for high availability.
+
+---
+
 ### **Production Issue 1: Kubernetes ImagePullBackOff**
 
 **Scenario**: A Python Flask API pod in AWS EKS fails to start, showing `ImagePullBackOff` due to issues pulling from a private AWS ECR repository, disrupting real-time data aggregation.
@@ -728,33 +869,6 @@ aws cloudwatch put-metric-alarm \
 
 ---
 
-### **Amazon’s Leadership Principles**
-1. **Customer Obsession**: Prioritize customer needs (e.g., 45% improved reporting accuracy for client analytics).
-2. **Ownership**: Act for the company’s benefit (e.g., led end-to-end model development).
-3. **Invent and Simplify**: Streamlined CI/CD pipelines and Snowflake queries.
-4. **Are Right, A Lot**: Made data-driven decisions in query optimization.
-5. **Learn and Be Curious**: Pursued AWS and Kubernetes expertise.
-6. **Hire and Develop the Best**: Mentored team, boosting productivity by 15%.
-7. **Insist on Highest Standards**: Achieved error-free deployments.
-8. **Think Big**: Designed scalable data aggregation systems.
-9. **Bias for Action**: Quickly resolved CPU spikes in production.
-10. **Frugality**: Reduced infrastructure costs by 25%.
-11. **Earn Trust**: Built trust through transparent communication.
-12. **Dive Deep**: Analyzed logs to fix deployment issues.
-13. **Have Backbone; Disagree and Commit**: Guided team on model logic.
-14. **Deliver Results**: Improved reliability by 25% and processing by 20%.
-15. **Strive to Be Earth’s Best Employer**: Fostered team growth.
-16. **Success and Scale**: Took responsibility for scalable solutions.
-
----
-
-### **Measuring Success**
-- **Customer-Centric Metrics**: 45% improved model consistency, faster report delivery.
-- **Technical Performance**: 20% faster Snowflake queries, 30% fewer deployment errors.
-- **Operational Efficiency**: 15% team productivity increase, 25% cost reduction.
-- **Client Feedback**: Ensured satisfaction via reliable analytics.
-- **Continuous Improvement**: Set up CloudWatch for proactive monitoring.
-
 **Team Management**:
 - Set clear goals (45% accuracy, 20% query speed improvement).
 - Delegated tasks based on strengths, mentored juniors.
@@ -763,22 +877,6 @@ aws cloudwatch put-metric-alarm \
 - Held regular check-ins for collaboration and risk management.
 
 ---
-
-### **Blue-Green Deployment Process**
-- **Code Commit**: Developers push to GitHub/Bitbucket.
-- **CI/CD Trigger**: GitHub Actions builds/tests Docker containers.
-- **Green Deployment**: New version deployed to Green environment (Kubernetes/EKS).
-- **Validation**: Test Green environment with CloudWatch monitoring.
-- **Traffic Switch**: Route traffic to Green via AWS ELB/Kubernetes Ingress.
-- **Monitoring**: Track metrics (CPU, latency) in CloudWatch.
-- **Rollback**: Switch back to Blue if issues arise.
-
-**Metrics Impact**:
-- **Deployment Frequency (DF)**: Faster via automation.
-- **Lead Time for Changes (LTTC)**: Reduced by 25%.
-- **Change Failure Rate (CFR)**: Eliminated errors.
-- **Mean Time to Restore (MTTR)**: Minimized via rollback.
-- **Post-Level Availability**: Ensured via zero-downtime switch.
 
 ---
 
@@ -807,102 +905,6 @@ aws cloudwatch put-metric-alarm \
     ```
   - Optimized Snowflake queries with Python, reducing execution time by 20%.
 - **Outcome**: Zero-downtime deployment, 30% fewer misalignments, 25% improved reliability.
-
----
-
-### **Career Goals (5 Years)**
-- **Vision**: Lead Cloud Architect, driving innovative DevOps solutions.
-- **Plan**: Master serverless computing, AI-driven automation, and earn AWS Solutions Architect Professional certification.
-- **Impact**: Optimize infrastructure costs, enhance user experiences, and mentor teams, building on 15% productivity gains at NielsenIQ.
-
----
-
-### **Why Leave Current Role?**
-- Seeking complex challenges to grow expertise in large-scale cloud solutions.
-- Delivered 25% faster deployments and 25% cost reductions at NielsenIQ but want broader impact.
-- Maintain trust through transparency about career goals.
-
----
-
-### **Why Amazon?**
-- Aligns with **Customer Obsession** via reliable solutions (e.g., 45% reporting accuracy).
-- Inspires **Think Big** with global-scale systems using AWS, Kubernetes, and Python.
-- Salary expectation: 18 LPA (within 24 LPA budget).
-- Opportunity to drive efficiency and customer satisfaction.
-
----
-
-### **Primary Metrics**
-- **Deployment Frequency (DF)**: Track via GitHub Actions for rapid delivery.
-- **Lead Time for Changes (LTTC)**: Monitor via Git logs (hours).
-- **Change Failure Rate (CFR)**: Low (0–15%) via incident tools.
-- **Mean Time to Restore (MTTR)**: <1 hour via CloudWatch.
-- **Service Failure Rate**: Low via Prometheus/Grafana.
-- **Post-Level Availability**: 99.99% via Grafana SLOs.
-- **Request Latency**: <200ms via CloudWatch.
-- **Error Rate**: Low via ELK/Splunk.
-- **CSAT/NPS**: High via client surveys.
-
-**Secondary Metrics**:
-- **Pile Up**: Minimal via CI/CD queue tracking.
-- **Backup Rate**: Reliable via backup logs.
-- **Clearance Sale**: Resolve technical debt via Jira.
-- **Canary/Non-Canary**: Compare via Grafana.
-- **Deployment for Zone**: Consistent via CloudWatch.
-- **Identify the Pattern**: Detect trends via Grafana/Prometheus.
-- **Code Review Time**: Fast via GitHub.
-- **Test Coverage**: >80% via Codecov.
-- **Infrastructure Utilization**: Optimize via Grafana (CPU, memory).
-- **CPU Spiking Up**: Detect via CloudWatch/Grafana.
-- **Ring-Based Deployments**: Stable via Kubernetes.
-- **Last Successful Control**: Track via Grafana.
-- **Incident Response Time**: Fast via OpsGenie.
-- **Build Failure Rate**: Low via GitHub Actions.
-
----
-
-### **Improving Operations**
-- **CI/CD Optimization**: Reduced deployment time by 25% and misalignments by 30%.
-- **Containerization**: Eliminated errors via Docker/Kubernetes.
-- **Infrastructure Automation**: Cut provisioning time by 20% and costs by 25% with Terraform/Ansible.
-- **Monitoring**: Improved reliability by 25% with CloudWatch.
-- **Data Processing**: Boosted efficiency by 20% and accuracy by 45% with Snowflake/Python.
-- **Team Mentoring**: Increased productivity by 15%.
-- **API Development**: Enhanced communication with Flask APIs.
-
----
-
-### **Deployment Strategies**
-1. **Blue-Green (Used)**:
-   - Two environments (Blue: current, Green: new).
-   - Zero downtime, low MTTR, high availability.
-   - Tools: AWS ELB, Kubernetes, Terraform, CloudWatch.
-2. **Canary**:
-   - Gradual rollout to small user subset.
-   - Reduces CFR via early issue detection.
-3. **Rolling**:
-   - Incremental pod updates in Kubernetes.
-   - Resource-efficient but risks compatibility issues.
-4. **Feature Flag**:
-   - Hide features behind toggles.
-   - Flexible, reduces CFR via selective rollout.
-5. **A/B Testing**:
-   - Compare versions for user feedback.
-   - Improves CSAT/NPS.
-6. **Shadow**:
-   - Test new version with duplicated traffic.
-   - Safe, reduces CFR without user impact.
-7. **Recreate**:
-   - Terminate old version, deploy new.
-   - High risk, not used due to downtime.
-
-**Comparison with Blue-Green**:
-- **Canary**: Safer for testing, slower LTTC.
-- **Rolling**: Resource-efficient, risks disruptions.
-- **Feature Flag**: Ideal for feature releases.
-- **A/B**: User-focused, complements data systems.
-- **Shadow**: Safe testing, high resource use.
-- **Recreate**: Unsuitable for high availability.
 
 ---
 
